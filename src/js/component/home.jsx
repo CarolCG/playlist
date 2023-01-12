@@ -11,6 +11,12 @@ const Home = () => {
 	let [positionMusica, setpositionMusica] = useState(0)
 	let cancionUrl = useRef()
 
+	const subirVolumen = () => {
+		cancionUrl.current.volume += 0.10;
+	  }
+	  const bajarVolumen = () => {
+		cancionUrl.current.volume -= 0.10;
+	  }
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/sound/songs")
 		.then((response) => {return response.json()
@@ -63,15 +69,17 @@ cancionUrl.current.play();
 		<div className="d-flex justify-content-center bg-black fixed-bottom ">
 		<audio id="reproductor" ref={cancionUrl}>
 		</audio>
-		<button onClick={CancionParaAtras}>
-		<i className="fa fa-backward " style={{width: "50%", height:"25%"}}></i>
+		<button className="m-2 rounded-4" onClick={bajarVolumen}><i class="fas fa-volume-down mx"></i></button>
+		<button className="m-2 rounded-4" onClick={CancionParaAtras}>
+		<i className="fa fa-backward mx " style={{width: "50%", height:"25%"}}></i>
 		</button>
-		<button  onClick={cambiarIcono}>
+		<button  className="m-2 rounded-4" onClick={cambiarIcono}>
 		<i className={valorIcono} style={{width: "50%", height:"25%"}} ></i>
 		</button>
-		<button onClick={CancionParaAdelante}>
-        <i className="fa fa-forward" style={{width: "50%", height:"25%"}}></i>
+		<button className="m-2 rounded-4" onClick={CancionParaAdelante}>
+        <i className="fa fa-forward mx" style={{width: "50%", height:"25%"}}></i>
 		</button>
+		<button className="m-2 rounded-4" onClick={subirVolumen}><i class="fas fa-volume-up mx"></i></button>
 		</div>
 		</div>
 	);
